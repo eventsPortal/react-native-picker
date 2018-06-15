@@ -57,6 +57,9 @@ RCT_EXPORT_METHOD(_init:(NSDictionary *)indic){
     NSString *pickerFontFamily=[NSString stringWithFormat:@"%@",indic[@"pickerFontFamily"]];
     NSArray *pickerFontColor=indic[@"pickerFontColor"];
     NSString *pickerRowHeight=indic[@"pickerRowHeight"];
+    NSString *leftButtonLeftOffset=indic[@"leftButtonLeftOffset"];
+    NSString *rightButtonRightOffset=indic[@"rightButtonRightOffset"];
+    
     id pickerData=indic[@"pickerData"];
 
     NSMutableDictionary *dataDic=[[NSMutableDictionary alloc]init];
@@ -80,7 +83,7 @@ RCT_EXPORT_METHOD(_init:(NSDictionary *)indic){
         self.height=220;
     }
     
-    self.pick=[[BzwPicker alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height) dic:dataDic leftStr:pickerCancelBtnText centerStr:pickerTitleText rightStr:pickerConfirmBtnText topbgColor:pickerToolBarBg bottombgColor:pickerBg leftbtnbgColor:pickerCancelBtnColor rightbtnbgColor:pickerConfirmBtnColor centerbtnColor:pickerTitleColor selectValueArry:selectArry weightArry:weightArry pickerToolBarFontSize:pickerToolBarFontSize pickerFontSize:pickerFontSize pickerFontColor:pickerFontColor  pickerRowHeight: pickerRowHeight pickerFontFamily:pickerFontFamily];
+    self.pick=[[BzwPicker alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, self.height) dic:dataDic leftStr:pickerCancelBtnText centerStr:pickerTitleText rightStr:pickerConfirmBtnText topbgColor:pickerToolBarBg bottombgColor:pickerBg leftbtnbgColor:pickerCancelBtnColor rightbtnbgColor:pickerConfirmBtnColor centerbtnColor:pickerTitleColor selectValueArry:selectArry weightArry:weightArry pickerToolBarFontSize:pickerToolBarFontSize pickerFontSize:pickerFontSize pickerFontColor:pickerFontColor  pickerRowHeight: pickerRowHeight pickerFontFamily:pickerFontFamily leftButtonLeftOffset:leftButtonLeftOffset rightButtonRightOffset:rightButtonRightOffset];
     
     _pick.bolock=^(NSDictionary *backinfoArry){
 

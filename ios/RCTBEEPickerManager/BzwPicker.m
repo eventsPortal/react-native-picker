@@ -12,7 +12,7 @@
 @implementation BzwPicker
 
 -(instancetype)initWithFrame:(CGRect)frame dic:(NSDictionary *)dic leftStr:(NSString *)leftStr centerStr:(NSString *)centerStr rightStr:(NSString *)rightStr topbgColor:(NSArray *)topbgColor bottombgColor:(NSArray *)bottombgColor leftbtnbgColor:(NSArray *)leftbtnbgColor rightbtnbgColor:(NSArray *)rightbtnbgColor centerbtnColor:(NSArray *)centerbtnColor selectValueArry:(NSArray *)selectValueArry  weightArry:(NSArray *)weightArry
-       pickerToolBarFontSize:(NSString *)pickerToolBarFontSize  pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily
+       pickerToolBarFontSize:(NSString *)pickerToolBarFontSize  pickerFontSize:(NSString *)pickerFontSize  pickerFontColor:(NSArray *)pickerFontColor pickerRowHeight:(NSString *)pickerRowHeight pickerFontFamily:(NSString *)pickerFontFamily leftButtonLeftOffset:(NSString *)leftButtonLeftOffset rightButtonRightOffset:(NSString *)rightButtonRightOffset
 
 {
     self = [super initWithFrame:frame];
@@ -31,18 +31,24 @@
         self.pickerFontSize=pickerFontSize;
         self.pickerFontFamily=pickerFontFamily;
         self.pickerFontColor=pickerFontColor;
-        self.pickerRowHeight=pickerRowHeight;
+        self.pickerRowHeight=pickerRowHeight;  
+        self.leftButtonLeftOffset=leftButtonLeftOffset;  
+        self.rightButtonRightOffset=rightButtonRightOffset;
         [self getStyle];
         [self getnumStyle];
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self makeuiWith:topbgColor With:bottombgColor With:leftbtnbgColor With:rightbtnbgColor With:centerbtnColor];
+            [self makeuiWith:topbgColor With:bottombgColor With:leftbtnbgColor With:rightbtnbgColor With:centerbtnColor With:leftButtonLeftOffset With:rightButtonRightOffset];
             [self selectRow];
         });
     }
     return self;
 }
--(void)makeuiWith:(NSArray *)topbgColor With:(NSArray *)bottombgColor With:(NSArray *)leftbtnbgColor With:(NSArray *)rightbtnbgColor With:(NSArray *)centerbtnColor
-{
+-(void)makeuiWith:(NSArray *)topbgColor With:(NSArray *)bottombgColor With:(NSArray *)leftbtnbgColor With:(NSArray *)rightbtnbgColor With:(NSArray *)centerbtnColor With:(NSString *)leftButtonLeftOffset With:(NSString *)rightButtonRightOffset
+{  
+
+    float leftOffset = [leftButtonLeftOffset floatValue];
+    float rightOffset = [rightButtonRightOffset floatValue];
+
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0,0, self.frame.size.width, 40)];
     view.backgroundColor = [self colorWith:topbgColor];
     [self addSubview:view];
@@ -51,7 +57,7 @@
     self.leftBtn.frame = CGRectMake(0, 0, 90, 40);
     self.leftBtn.font = [UIFont fontWithName:_pickerFontFamily size:[_pickerToolBarFontSize integerValue]];
     self.leftBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [self.leftBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 10.0, 0, 0)];
+    [self.leftBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, leftOffset, 0, 0)];
     [self.leftBtn setTitle:self.leftStr forState:UIControlStateNormal];
     [self.leftBtn setTitleColor:[self colorWith:leftbtnbgColor] forState:UIControlStateNormal];
     [self.leftBtn addTarget:self action:@selector(cancleAction) forControlEvents:UIControlEventTouchUpInside];
@@ -61,7 +67,7 @@
     self.rightBtn.frame = CGRectMake(view.frame.size.width-90,0, 90, 40);
     self.rightBtn.font = [UIFont fontWithName:_pickerFontFamily size:[_pickerToolBarFontSize integerValue]];
     self.rightBtn.contentHorizontalAlignment=UIControlContentHorizontalAlignmentRight;
-    [self.rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 10.0)];
+    [self.rightBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, rightOffset)];
     [self.rightBtn setTitle:self.rightStr forState:UIControlStateNormal];
     [self.rightBtn setTitleColor:[self colorWith:rightbtnbgColor] forState:UIControlStateNormal];
     [self.rightBtn addTarget:self action:@selector(cfirmAction) forControlEvents:UIControlEventTouchUpInside];  

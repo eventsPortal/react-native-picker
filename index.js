@@ -27,7 +27,9 @@ const options = {
     onPickerSelect(){},
     pickerToolBarFontSize: 16,
     pickerFontSize: 16,
-    pickerFontColor: [31, 31 ,31, 1]
+    pickerFontColor: [31, 31 ,31, 1],
+    leftButtonLeftOffset: 10,
+    rightButtonRightOffset: 10
 };
 
 export default {
